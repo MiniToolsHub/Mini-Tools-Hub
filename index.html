@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Tools</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .app {
+            width: 350px;
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            background: #00c6ff;
+        }
+
+        button:hover {
+            background: #00a2d4;
+        }
+
+        .section {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border-radius: 10px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+        <h1>🚀 Mini Tools</h1>
+        <p>Полезные инструменты онлайн</p>
+
+        <div class="section">
+            <h3>🔐 Генератор паролей</h3>
+            <input id="len" placeholder="Длина (например 12)">
+            <button onclick="genPass()">Создать пароль</button>
+            <div id="pass"></div>
+        </div>
+
+    </div>
+
+    <script>
+        function genPass() {
+            let len = document.getElementById("len").value || 12;
+            let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+            let pass = "";
+
+            for (let i = 0; i < len; i++) {
+                pass += chars[Math.floor(Math.random() * chars.length)];
+            }
+
+            document.getElementById("pass").innerHTML = "👉 " + pass;
+        }
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Tools Hub</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: white;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .app {
+            width: 400px;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #00c6ff;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #00a2d4;
+        }
+
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+    <h1>🚀 Mini Tools Hub</h1>
+
+    <!-- 🔐 PASSWORD -->
+    <div class="card">
+        <h3>🔐 Пароль</h3>
+        <input id="len" placeholder="Длина">
+        <button onclick="genPass()">Сгенерировать</button>
+        <div class="result" id="pass"></div>
+    </div>
+
+    <!-- 🧮 CALCULATOR -->
+    <div class="card">
+        <h3>🧮 Калькулятор</h3>
+        <input id="calc" placeholder="Например: 2+2">
+        <button onclick="calculate()">Посчитать</button>
+        <div class="result" id="calcResult"></div>
+    </div>
+
+    <!-- 📝 NOTES -->
+    <div class="card">
+        <h3>📝 Заметки</h3>
+        <textarea id="note" placeholder="Пиши заметку..."></textarea>
+        <button onclick="saveNote()">Сохранить</button>
+        <div class="result" id="noteResult"></div>
+    </div>
+
+    <!-- 🔁 TEXT -->
+    <div class="card">
+        <h3>🔁 Текст в CAPS</h3>
+        <input id="text" placeholder="Введите текст">
+        <button onclick="toUpper()">Преобразовать</button>
+        <div class="result" id="textResult"></div>
+    </div>
+</div>
+
+<script>
+    // 🔐 password
+    function genPass() {
+        let len = document.getElementById("len").value || 12;
+        let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+        let pass = "";
+
+        for (let i = 0; i < len; i++) {
+            pass += chars[Math.floor(Math.random() * chars.length)];
+        }
+
+        document.getElementById("pass").innerHTML = pass;
+    }
+
+    // 🧮 calculator
+    function calculate() {
+        let val = document.getElementById("calc").value;
+        try {
+            document.getElementById("calcResult").innerHTML = eval(val);
+        } catch {
+            document.getElementById("calcResult").innerHTML = "Ошибка";
+        }
+    }
+
+    // 📝 notes
+    function saveNote() {
+        let note = document.getElementById("note").value;
+        document.getElementById("noteResult").innerHTML = "💾 Сохранено: " + note;
+    }
+
+    // 🔁 text
+    function toUpper() {
+        let text = document.getElementById("text").value;
+        document.getElementById("textResult").innerHTML = text.toUpperCase();
+    }
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Security Hub</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 420px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+        .card {
+            margin-top: 15px;
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            color: white;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+        }
+
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+
+        .badge {
+            text-align: center;
+            font-size: 11px;
+            margin-top: 10px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🔐 Password Security Hub</h1>
+    <p>Создавай безопасные пароли за секунду</p>
+
+    <div class="card">
+        <h3>⚡ Генератор паролей</h3>
+
+        <input id="len" type="number" placeholder="Длина пароля (например 12)" value="12">
+
+        <button onclick="generate()">Сгенерировать пароль</button>
+
+        <div class="result" id="result">Здесь появится пароль</div>
+    </div>
+
+    <div class="badge">💡 Secure • Fast • Free</div>
+
+</div>
+
+<script>
+    function generate() {
+        let len = document.getElementById("len").value || 12;
+        let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+        let pass = "";
+
+        for (let i = 0; i < len; i++) {
+            pass += chars[Math.floor(Math.random() * chars.length)];
+        }
+
+        document.getElementById("result").innerText = pass;
+    }
+</script>
+
+</body>
+</html>
+<button onclick="window.open('https://t.me/minitoolshub)">
+💬 Я создатель Mini Tools Hub — Telegram
+</button>
+<a href="https://t.me/minitoolshub" target="_blank">
+    Перейти в Telegram канал
+</a>
